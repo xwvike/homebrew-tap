@@ -1,6 +1,7 @@
-# 这份文件的源头在 github.com/xwvike/gong 的 packaging/gong.rb，
-# 那边跟源码一起版本化。发版时拷过来，
-# 把 sha256 换成 release 里那个。
+# 由 xwvike/gong 的 packaging/gong.rb 同步而来。原注释：
+# 这份文件的部署目标是 github.com/xwvike/homebrew-tap 的 Formula/gong.rb
+# （brew 里叫 xwvike/tap，是已有的 tap，不要为 gong 另建一个）。
+# 放在源码里是为了跟版本一起管。发版时拷过去，把 sha256 换成 release 里那个。
 #
 # 三条不能破的规矩：
 #   1. 必须是 formula，永远不要做成 cask。Gatekeeper 这轮收紧只影响 cask；
@@ -12,11 +13,11 @@
 class Gong < Formula
   desc "到点在所有屏幕最顶层播一段动画的定时提醒，不抢焦点、不吃点击"
   homepage "https://github.com/xwvike/gong"
-  version "0.1.1"
+  version "0.1.2"
   license "MIT"
 
   url "https://github.com/xwvike/gong/releases/download/v#{version}/gong-#{version}-macos-universal.tar.gz"
-  sha256 "7d723011116d4442f1af79654f6e131c0747c5eff9a48a8b21de76ff1c45e562"
+  sha256 "ad091fcc9a4379f2ec00ac28ba17d4ee8c7105de72869bf47abf84292bc164e7"
 
   depends_on :macos
 
@@ -36,13 +37,15 @@ class Gong < Formula
       默认两条：noon 12:00、evening 18:00，周一到周五。
       要增删改查、换主题、预览，跑 gong set。
 
-      卸载前请先跑：
+      卸载走这条，别直接 brew uninstall：
 
-        gong off
+        gong uninstall
 
-      brew uninstall 不会清 ~/Library/LaunchAgents 里的 plist，formula 没有
-      uninstall hook。不跑 gong off 的话，那几条定时会一直尝试拉起一个
-      已经不存在的二进制，而且是静默失败。
+      它会先清 plist、从 launchd 撤出，最后自动帮你跑 brew uninstall。
+      formula 没有 uninstall hook，直接 brew uninstall 会把 plist 留在
+      ~/Library/LaunchAgents，每天到点去拉一个不存在的二进制，静默失败。
+
+      只想暂停：gong off
     EOS
   end
 
