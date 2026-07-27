@@ -12,11 +12,11 @@
 class Gong < Formula
   desc "到点在所有屏幕最顶层播一段动画的定时提醒，不抢焦点、不吃点击"
   homepage "https://github.com/xwvike/gong"
-  version "0.1.0"
+  version "0.1.1"
   license "MIT"
 
   url "https://github.com/xwvike/gong/releases/download/v#{version}/gong-#{version}-macos-universal.tar.gz"
-  sha256 "e614589a507bd194b721403ec80ce48adc2a8b483f2d0522330ecfb5fe7e8272"
+  sha256 "7d723011116d4442f1af79654f6e131c0747c5eff9a48a8b21de76ff1c45e562"
 
   depends_on :macos
 
