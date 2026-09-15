@@ -1,11 +1,11 @@
 class Gong < Formula
   desc "I'm outta here!"
   homepage "https://github.com/xwvike/gong"
-  version "0.1.17"
+  version "0.1.18"
   license "MIT"
 
   url "https://github.com/xwvike/gong/releases/download/v#{version}/gong-#{version}-macos-universal.tar.gz"
-  sha256 "a93eee8a99f1b16108f85aee09ae956b6caa511a2b2f379cdb335fe32772423a"
+  sha256 "f37b8f860f65e6fda1468c78c3ef8bc3305095f693a2ceccc819403e45e183e2"
 
   depends_on :macos
 
@@ -18,7 +18,7 @@ class Gong < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/gong version")
     assert_match "led", shell_output("#{bin}/gong themes")
-    system bin/"gong-overlay", "--force", "--timeout", "3",
+    system bin/"gong-overlay", "--force", "--require-done", "--timeout", "20",
            "--theme", pkgshare/"themes/led/index.html"
   end
 end
